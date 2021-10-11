@@ -118,6 +118,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 4.项目为了在线预览图片与视频使用了springboot的虚拟路径，路径配置位于WebMvcConfig.java中，默认为D:/Test/
 
 
+5.http://localhost:8080/ 进入网站，首先应注册一个账户
+
 网站截图
 ---------------
 
