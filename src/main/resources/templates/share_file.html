@@ -1,0 +1,620 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Disk</title>
+
+    <link rel="stylesheet" href="/css/buttons.css">
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!--    <link rel="stylesheet" href="/css/jquery.fileupload-ui.css">-->
+    <!--    <link rel="stylesheet" href="/css/jquery.fileupload.css">-->
+    <!--    <script src="/js/vendor/jquery.ui.widget.js"></script>-->
+    <!--    <script src="/js/jquery.iframe-transport.js"></script>-->
+    <!--    <script src="/js/jquery.fileupload.js"></script>-->
+    <!--上传进度条-->
+
+
+    <!--固定框架-->
+    <link rel='stylesheet' href='/css/bootstrap.min.css'>
+
+    <!--图标库-->
+    <link rel='stylesheet' href='/css/material-design-iconic-font.min.css'>
+
+    <!--核心样式-->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https:/code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="/jq/jquery.session.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.0/viewer.common.js" integrity="sha512-O69p3q0WJ5UlMCPGXfj8vc9yRDvcR2Z2cn+xUk9mm+AL9alkNlGBYKnKTncFCjYiWWTWl9s8hKZSsU2YyWmQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.0/viewer.js" integrity="sha512-psAniLUS9J4A5KNQiSt9XMNeVSMx/Rz89vQJqeYlOIiTR5WK8zU/8EPwAKt+522eeV04QUzIwX5VrAW10FbdeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.0/viewer.css" integrity="sha512-tYobxYoCZxl0CejYCA8c4w8HRcg3wRoKaGYIQ/2ILqyB4vRqMd/Jmehxod1dQJ2uE/9rDY9pG48isM8SHEAwDQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="/css/video-js.min.css" rel="stylesheet">
+    <script src="/jq/video.min.js"></script>
+
+
+</head>
+
+<!--不再用$(document).ready(function()-->
+<body class="web-body" onload="load()">
+
+    <!-- Content -->
+    <div id="content">
+        <nav class="navbar navbar-default" id="topbar">
+            <div class="container-fluid">
+
+                <ul style="float: left" class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="http://localhost:8080" style="font-size: 25px;color: #ffffff">loivgehoto cloud disk</a>
+                    </li>
+                </ul>
+
+
+
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li> <input type="checkbox" id="toggle-button" style="margin-right: 20px">
+                        <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+                        <label for="toggle-button" class="button-label" style="margin-right: 20px">
+                            <span class="circle"></span>
+                            <span class="text on">黑夜</span>
+                            <span class="text off">白天</span>
+                        </label>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <div style="margin-top: 2%">
+            <span style="color: #72ea7c;font-size: 30px;position: relative;float:left;left: 15%" th:text="${share_file.user_name}+'的分享'"></span>
+            <span style="color: #4cd055;font-size: 15px;position: relative;float: left;left: 16%;margin-top: 18px" th:text="'大小:'+${share_file.file_size}+'kb'"></span>
+            <a th:href="'/download_in_share?fileName='+${share_file.file_name}+'&user_name='+${share_file.user_name}" style="float: right;margin-right: 20%;font-size: 25px"  class="btn download" ><i class="bi bi-download"></i>下载</a>
+        </div>
+
+        <div style="text-align: center;margin-top: 15%">
+
+            <td class="file_icon" th:if="${share_file.suffix!='jpg' and share_file.suffix!='png' and share_file.suffix!='jpeg' and share_file.suffix!='bmp' and share_file.suffix!='png' and share_file.suffix!='gif' and share_file.suffix!='doc' and share_file.suffix!='docx' and share_file.suffix!='folder' and share_file.suffix!='txt' and share_file.suffix!='ini' and share_file.suffix!='xml'
+           and share_file.suffix!='mp3'and share_file.suffix!='wma'and share_file.suffix!='wav'and share_file.suffix!='ape'and share_file.suffix!='flac' and share_file.suffix!='mp4'and share_file.suffix!='mov'and share_file.suffix!='avi'and share_file.suffix!='flv'and share_file.suffix!='wmv'and share_file.suffix!='mpeg'and share_file.suffix!='mkv'
+           and share_file.suffix!='rar'and share_file.suffix!='zip'and share_file.suffix!='tar'and share_file.suffix!='7z'  }">
+                <i class="bi bi-file-earmark" style="position: relative;font-size: 200px;color: #90f199"></i>
+
+
+            <td class="file_icon"  th:if="${share_file.suffix=='jpg'||share_file.suffix=='png'||share_file.suffix=='jpeg'||share_file.suffix=='bmp'|| share_file.suffix=='png'||share_file.suffix=='gif'}"><i class="bi bi-image" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='doc'||share_file.suffix=='docx'}"><i class="bi bi-file-earmark-word" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='folder'}"><i class="bi bi-folder" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='txt'||share_file.suffix=='ini'||share_file.suffix=='xml' }"><i class="bi bi-file-earmark-text" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='mp3'||share_file.suffix=='wma'||share_file.suffix=='wav'||share_file.suffix=='ape'||share_file.suffix=='flac' }"><i class="bi bi-file-earmark-music" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='mp4'||share_file.suffix=='mov'||share_file.suffix=='avi'||share_file.suffix=='flv'||share_file.suffix=='wmv'||share_file.suffix=='mpeg'||share_file.suffix=='mkv'}"><i class="bi bi-file-earmark-play" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+            <td class="file_icon"  th:if="${share_file.suffix=='rar'||share_file.suffix=='zip'||share_file.suffix=='tar'||share_file.suffix=='7z'}"><i class="bi bi-file-earmark-zip-fill" style="position: relative;font-size: 200px;color: #90f199"></i></td>
+
+
+
+
+            <br>
+                <span style="color: #72ea7c;font-size: 25px;position: relative;"  th:text="${share_file.file_name}"></span>
+        </div>
+
+<!--        th:href="'/download?fileName='+${file.file_name}"-->
+    </div>
+
+
+</div>
+</body>
+
+
+<script type="text/javascript">
+
+    $('#upload_folder_checkbox').click(function ()
+    {
+        if($('#upload_folder_checkbox').prop('checked')==true)
+        {
+            $.cookie('select-folder','true');
+            location.reload();
+        }
+        else
+        {
+            $.cookie('select-folder', 'false');
+            location.reload();
+        }
+    });
+
+    function view_image(file_name,user_name)
+    {
+        var image = new Image();
+        image.src = '/rootFolder/'+user_name+'/'+file_name;
+        // console.log("加载图片"+image.src );
+        var viewer = new Viewer(image, {
+            hidden: function () {
+                viewer.destroy();
+            },
+        });
+        // image.click();
+        viewer.show();
+    }
+
+    // function play_video(file_name)
+    // {
+    //     $.ajax(
+    //         {
+    //             type:"GET",
+    //             url:"/video?videoName=" + file_name,
+    //             dataType:"text",
+    //             success: function (data)
+    //             {
+    //                 window.location.href='/video';////用ajax后端无法跳转页面，必须用ajax跳转
+    //                 // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+    //             }
+    //         }
+    //     )
+    // }
+
+    $('#search-button').click(function ()
+    {
+        var file_name=$('#search-bar').val();
+        $.ajax(
+            {
+                type:"GET",
+                url:"search?file_name="+file_name,
+                dataType:"text",
+                success: function (data)
+                {
+                    window.location.href='/search_result';
+                }
+            }
+        )
+    });
+
+    $("#first_checkbox").change(function ()
+    {
+        if(this.checked)
+        {$(".single_checkbox ").each(function ()
+        {
+            this.checked=true;
+        });}
+        else
+        {$(".single_checkbox").each(function ()
+        {
+            this.checked=false;
+        });}
+    });
+
+
+
+    $('.button-label').click(function () {
+        if($('#toggle-button').prop('cheked'))//这个表示黑暗模式关闭
+        {
+            $.cookie('darkmode','false');
+            $('.table-td').css("color","black");
+            $('.image-td').css("color","#7ddc52");
+            $('#count').css("color","black");
+            $('#topbar').css("background-color","#1bd92c");
+            $('#sidebar').css("background-color","#15bb31");
+            $('#sidebar header').css("background-color","#15bb31");
+            $('.web-body').css("background-color","#ffffff");
+            $('.file_icon').css("color","#5aa531");
+            $('.folder_icon').css("color","#ece635");
+            $('#toggle-button').prop("cheked",false);///必须要用这个设置选中状态，否则第二遍开关按钮会不起作用
+
+            // console.log(darkmode.isActivated()) // will return true
+        }
+        else ///这个表示黑暗模式开启
+        {
+            // var one=$('.web-body');
+            // one.classList.add('transition');
+            $.cookie('darkmode','true');
+            $('.table-td').css("color","#9caa9d");
+            $('.image-td').css("color","#39c434");
+            $('#count').css("color","#6fe574");
+            $('#topbar').css("background-color","#20a52c")
+            $('.file_icon').css("color","#58dc0f")
+            $('.folder_icon').css("color","#e7ef2b")
+            $('#sidebar').css("background-color","#000000")
+            $('#sidebar header').css("background-color","#000000")
+            $('.web-body').css("background-color","#000000");
+
+            $('#toggle-button').prop("cheked",true);//必须要用这个设置选中状态，否则第二遍开关按钮会不起作用
+            // console.log(darkmode.isActivated()) // will return true
+        }}
+    );
+
+    function move_to_recycle_bin(filename)
+    {
+        var url=window.location.href;
+        $.ajax(
+            {
+                type:"GET",
+                url:"move_to_recycle_bin?fileName=" + filename,
+                dataType:"text",
+                success: function (data)
+                {
+                    window.location.href=url;////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+
+    /////////////////////////////////////////////////////////////////// 点击实现按文件名称排序
+    function sort_by_name_desc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"name_desc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+    function sort_by_name_asc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"name_asc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+    /////////////////////////////////////////////////////////////////// 点击实现按文件名称排序
+
+
+
+    function sort_by_size_desc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"size_desc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+    function sort_by_size_asc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"size_asc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+
+    function sort_by_time_asc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"time_asc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+    function sort_by_time_desc()/////////////////点击排序按钮，进行按文件名称排序
+    {
+        if(window.location.href!="http://localhost:8080/home")
+            var parame=window.location.href.slice(-10);
+        else
+            var parame="?pageNum=1";
+        // if($.session.get('sort_by_name')=="desc")
+        //     $.session.set('sort_by_name','asc');
+        // else if($.session.get('sort_by_name')=="asc")
+        //     $.session.set('sort_by_name','desc');
+        // else
+        //     $.session.set('sort_by_name','desc');
+        console.log($.session.get('sort_by_name'));
+        $.ajax(
+            {
+                type:"GET",
+                url:"time_desc"+parame,
+                dataType:"text",
+                success: function (data)
+                {
+                    location.reload();////用ajax后端无法跳转页面，必须用ajax跳转
+                    // window.location.href='/home';////////////接收到的信息表示账户信息是正确的，则跳转页面,用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            }
+        )
+    }
+
+    $('#upload-button').click(function ()/////important这个为上传文件的ajax方法，用ajax只能ajax进行页面跳转，后端无效
+    {
+        // var formData = new FormData();
+        //   formData.append("file", $("#select-file")[0].files[0]);
+        //   var formData=new FormData($("#select-file-form"[0]));
+        if ($.cookie('select-folder')=='true')
+        {
+            $('.progress').show();
+            $('#upload_folder_checkbox').hide();
+            $('#wen-jian-jia-shang-chuan').hide();
+            event.preventDefault();
+            var formData = new FormData();
+            var file=$('#select-folder')[0].files;//////////////////important！！这里是#select-folder
+            for(var i=0;i<file.length;i++)
+            {
+                formData.append("file",file[i]);
+            }
+            var url=window.location.href;
+            $.ajax({
+                xhr : function() {
+                    var xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener('progress', function(e) {
+
+                        if (e.lengthComputable) {
+                            console.log('Bytes Loaded: ' + e.loaded);
+                            console.log('Total Size: ' + e.total);
+                            console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+                            var percent = Math.round((e.loaded / e.total) * 100);
+                            if(percent==100)
+                                $('#saving_span').show();
+                            $('#progressBar').attr('aria-valuenow', percent).css({"width": percent + "%","color":"#8d2cea","font-size":"12px","font-weight":"bold"}).text(percent + '%');
+                        }
+                    });
+                    return xhr;
+                },
+                type: "POST",
+                url: '/upload',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data)
+                {
+                    // var num=$('#get_cunrrent_pagenum').val();
+                    // '/home?pageNum='+num
+                    window.location.href=url;////用ajax后端无法跳转页面，必须用ajax跳转
+                }
+            })
+        }
+        else if($.cookie('select-folder')=='false')
+        {
+            $('.progress').show();
+            $('#upload_folder_checkbox').hide();
+            $('#wen-jian-jia-shang-chuan').hide();
+            event.preventDefault();
+            var formData = new FormData();
+            var file=$('#select-file')[0].files;
+            for(var i=0;i<file.length;i++)
+            {
+                formData.append("file",file[i]);
+            }
+
+            var url=window.location.href;
+
+            console.log(formData);
+            $.ajax({
+                xhr : function() {
+                    var xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener('progress', function(e) {
+
+                        if (e.lengthComputable) {
+                            console.log('Bytes Loaded: ' + e.loaded);
+                            console.log('Total Size: ' + e.total);
+                            console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+                            var percent = Math.round((e.loaded / e.total) * 100);
+                            if(percent==100)
+                                $('#saving_span').show();
+                            $('#progressBar').attr('aria-valuenow', percent).css({"width": percent + "%","color":"#8d2cea","font-size":"12px","font-weight":"bold"}).text(percent + '%');
+                        }
+                    });
+                    return xhr;
+                },
+                type: "POST",
+                url: '/upload',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data)
+                {
+                    // var num=$('#get_cunrrent_pagenum').val();
+                    // '/home?pageNum='+num
+                    window.location.href=url;////用ajax后端无法跳转页面，必须用ajax跳转
+
+                }
+            })
+        }
+    });
+
+
+    // $('#upload-button').click(function ()/////important这个为上传文件的ajax方法，用ajax只能ajax进行页面跳转，后端无效
+    // {
+    //   // var formData = new FormData();
+    //   //   formData.append("file", $("#select-file")[0].files[0]);
+    //   //   var formData=new FormData($("#select-file-form"[0]));
+    //
+    //     var formData = new FormData();
+    //     var file=$('#select-file')[0].files;
+    //     for(var i=0;i<file.length;i++)
+    //     {
+    //         formData.append("file",file[i]);
+    //     }
+    //
+    //   var url=window.location.href;
+    //
+    //   console.log(formData);
+    //   $.ajax({
+    //     type: "POST",
+    //     url: '/upload',
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false,
+    //     success: function (data)
+    //     {
+    //       // var num=$('#get_cunrrent_pagenum').val();
+    //       // '/home?pageNum='+num
+    //       window.location.href=url;////用ajax后端无法跳转页面，必须用ajax跳转
+    //
+    //     }
+    //   })
+    // });
+
+    function load(){
+
+
+        if($.cookie('select-folder')==null)
+            $.cookie('select-folder','false');
+
+        if($.cookie('select-folder')=='true')
+        {
+            $('#select-folder').show();
+            $('#upload_folder_checkbox').prop('checked',true);
+        }
+        else
+        {
+            $('#select-file').show();
+            $('#upload_folder_checkbox').prop('checked',false);
+        }
+
+        if($.cookie('darkmode')=='true')
+        {
+            console.log(window.location.href);
+            $('.circle').addClass('disable_transition');
+            $('.web-body').addClass('disable_transition');
+            $('#sidebar').addClass('disable_transition');
+            $('#sidebar header').addClass('disable_transition');
+
+            $('.button-label').click();
+            $('.web-body').removeClass('disable_transition');
+            $('#sidebar').removeClass('disable_transition');
+            $('#sidebar header').removeClass('disable_transition');
+            $('.circle').removeClass('disable_transition');
+        }
+
+    }
+
+
+    // function iEsc(){ return false; }
+    // function iRec(){ return true; }
+    // function DisableKeys() {
+    //   if(event.ctrlKey || event.shiftKey || event.altKey)  {
+    //     window.event.returnValue=false;
+    //     iEsc();}
+    // }
+    // document.ondragstart=iEsc;
+    // document.onkeydown=DisableKeys;
+    // document.oncontextmenu=iEsc;
+    // if (typeof document.onselectstart !="undefined")
+    //   document.onselectstart=iEsc;
+    // else{//qsyz.net
+    //   document.onmousedown=iEsc;
+    //   document.onmouseup=iRec;
+    // }
+    // function DisableRightClick(www_qsyz_net){
+    //   if (window.Event){
+    //     if (www_qsyz_net.which == 2 || www_qsyz_net.which == 3)
+    //       iEsc();}
+    //   else
+    //   if (event.button == 2 || event.button == 3){
+    //     event.cancelBubble = true
+    //     event.returnValue = false;
+    //     iEsc();}
+    // }
+
+</script>
+
+</body>
+</html>

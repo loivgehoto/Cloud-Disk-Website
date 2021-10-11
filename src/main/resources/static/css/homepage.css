@@ -1,0 +1,210 @@
+body
+{
+    background-image: url('pexels-pixabay-414171.jpg');
+    background-size: 100% 100%; 
+    background-attachment: fixed;
+    -moz-user-select: none; 
+
+    -webkit-user-select: none; 
+
+    -ms-user-select: none; 
+
+    -khtml-user-select: none; 
+
+    user-select: none;
+
+}
+body h1
+{
+    /* -moz-user-select: -moz-none; 
+    -moz-user-select: none; 
+    -o-user-select:none; 
+    -khtml-user-select:none; 
+    -webkit-user-select:none; 
+    -ms-user-select:none; 
+    user-select:none; */
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    color: rgb(168, 221, 202);
+    margin-top:10%;
+    font-size: 100px;
+    text-shadow:  0.1em 0.03em 0.2em  rgb(50, 184, 50);
+}
+.login
+{
+    /* -webkit-appearance:none;
+    -moz-appearance: none; */
+    text-align: center;
+    margin-top:5%;
+   
+}
+.login_panel
+{
+    background:inherit;
+    overflow: hidden;
+    height: 600px;
+    width:600px;
+    margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    border-radius: 30px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.login_panel:hover
+{
+    border-color:rgb(12, 238, 69);
+    border-style:solid;
+    /*-webkit-box-shadow: 10px 10px 99px 1px rgb(20, 196, 30);*/
+    /*-moz-box-shadow: 10px 10px 99px 1px rgb(20, 196, 30);*/
+    box-shadow: 0px 0px 30px 5px rgb(20, 196, 30);
+}
+.login_panel::before {
+    content: '';
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    background-attachment: fixed;
+    filter: blur(10px);
+}
+.login_panel::after {
+    content: "";
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(106, 97, 97, 0.25);
+}
+
+.name_class
+{
+    z-index: 2;
+    position:relative;
+    background-color: rgb(93, 89, 89);
+    font-size: large;
+    outline-style: none ;
+    border-radius: 10px;
+    width: 400px;
+    height: 40px;
+    margin: 20px 0px 20px 0px;
+   
+}
+.name_class:focus
+{
+    border: 1px  solid rgb(12, 238, 69);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+
+.password_class
+{
+    z-index: 2;
+    position: relative;
+    background-color: rgb(93, 89, 89);
+    font-size: large;
+    outline-style: none ;
+    border-radius: 10px;
+    width: 400px;
+    height: 40px;
+    margin: 5px 0px 5px 0px;
+}
+.password_class:focus
+{
+    border: 1px  solid rgb(12, 238, 69);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+.loginbuttom_class
+{
+    cursor: pointer;
+    z-index: 2;
+    font-family: "Courier New", monospace;
+    margin: 20px 0px 20px 0px;
+    font-size: 30px;
+    border-radius: 25px;
+    border: 1px  solid rgb(12, 238, 69);
+    background-color: rgb(50, 184, 50);
+    height: 60px;
+    width: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+#register
+{
+    transition: all 0.3s ease;
+}
+#register:hover
+{
+    text-shadow: 0 0 20px #98fa57;
+}
+
+input[type=checkbox]{
+    cursor: pointer;
+    position: relative;
+    width: 15px;
+    height:15px;
+    font-size: 15px;
+}
+
+input[type=checkbox]::after{
+    position: absolute;
+    top: 0;
+    background-color: #4f5851;
+    color: #6f25e0;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    visibility: visible;
+    padding-left: 0px;
+    text-align: center;
+    content: ' ';
+    border-radius: 3px
+}
+
+input[type=checkbox]:checked::after{
+    background-color: #8349ef;
+    color: #58fc62;
+    content: "✓";
+    font-size: 15px;
+    font-weight: bold;
+}
+/* 
+.loginbuttom_class:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #666 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .3s, opacity .5s;
+}
+ 
+.loginbuttom_class:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+} */

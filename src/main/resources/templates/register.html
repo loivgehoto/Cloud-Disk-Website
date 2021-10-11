@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <link rel="stylesheet" href="/css/homepage.css" type="text/css" />
+    <title>loivgehoto home</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="/jq/jquery.session.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+ <div class="login_panel">
+    <h1>
+        Register
+    </h1>
+
+<!--<%&#45;&#45;    onsubmit来阻止表单提交，页面不会跳转，而ajax将提交,,,,,,,,,,onsubmit返回false表示表单不会被提交&#45;&#45;%>-->
+<form class="login" method="GET" action="login" onsubmit="return false;">
+       <input type="text" name="username" class="name_class"  id="name" placeholder="username"><i id="account_available" style="font-size:25px;color: #33e046;position: relative;z-index: 2" class="bi bi-person-check-fill"></i> <span style="position:relative;color: #e31010;font-size: 25px;z-index: 2" id="nametip"></span>
+        <br>
+       <input type="text " name="password" class="password_class" id="pass" placeholder="password">
+       <br>
+<!--       <input id="save_infor_checkbox" type="checkbox" style="position: relative;float: left;z-index: 2;margin-left: 15%" ><span style="position: relative;z-index: 2;float: left">记住账号</span>-->
+<!--        <br>-->
+
+        <button class="loginbuttom_class">注册</button>
+       <br>
+<!--        <a id="register" style="position: relative;z-index: 2;color: #1bd92c;cursor: pointer;font-size: 25px">注册</a>-->
+<!--        <%&#45;&#45;submit标签改为button确保点击后不会跳转页面，onclick代表ajax检查账户正确性&#45;&#45;%>-->
+</form>
+
+</div>
+
+ <script type="text/javascript">
+     $(document).ready(function(){
+         $('#account_available').hide();
+     });
+
+     $('#name').change(function ()
+     {
+         var name = $("#name").val();
+         $.ajax(
+             {
+                 type:"GET",
+                 url:"register_check?username=" + name,
+                 dataType:"text",
+                 success: function (data)
+                 {
+                     if(data=="false")
+                     {$("#nametip").text("账户已存在");//////////这里设置span的值，注意span是text
+                         $('#account_available').hide();}
+                     else if(data=="true")
+                     {$("#nametip").text("");
+                         $('#account_available').show();}
+                 }
+             }
+         )
+     });
+
+     $('.loginbuttom_class').click(function () {
+         var name = $("#name").val();
+         var password=$('#pass').val();
+         $.ajax(
+             {
+                 type:"GET",
+                 url:"register_check?username=" + name,
+                 dataType:"text",
+                 success: function (data)
+                 {
+                     if(data=="false")
+                     {$("#nametip").text("账户已存在");//////////这里设置span的值，注意span是text
+                         $('#account_available').hide();}
+                     else if(data=="true")
+                     {
+                         $.ajax(
+                             {
+                                 type:"GET",
+                                 url:"register?user_name=" + name+ "&password="+password,
+                                 dataType:"text",
+                                 success: function (data)
+                                 {
+                                     window.location.href='/home'
+                                 }
+                             }
+                         )
+                     }
+                 }
+             }
+         )
+     });
+
+     function bodyclick()
+     {
+         $("#nametip").text("");
+     }
+     
+
+     // function iEsc(){ return false; }
+     // function iRec(){ return true; }
+     // function DisableKeys() {
+     //     if(event.ctrlKey || event.shiftKey || event.altKey)  {
+     //         window.event.returnValue=false;
+     //         iEsc();}
+     // }
+     // document.ondragstart=iEsc;
+     // document.onkeydown=DisableKeys;
+     // document.oncontextmenu=iEsc;
+     // if (typeof document.onselectstart !="undefined")
+     //     document.onselectstart=iEsc;
+     // else{//qsyz.net
+     //     document.onmousedown=iEsc;
+     //     document.onmouseup=iRec;
+     // }
+     // function DisableRightClick(www_qsyz_net){
+     //     if (window.Event){
+     //         if (www_qsyz_net.which == 2 || www_qsyz_net.which == 3)
+     //             iEsc();}
+     //     else
+     //     if (event.button == 2 || event.button == 3){
+     //         event.cancelBubble = true
+     //         event.returnValue = false;
+     //         iEsc();}
+     // }
+ </script>
+
+
+
+</body>
+
+
+</html>
+
+</body>
+
+
+</html>
