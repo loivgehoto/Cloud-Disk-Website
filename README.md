@@ -24,6 +24,13 @@
 6.动态数据分页功能使用pagehelper插件完成
 
 
+使用的技术
+-------------
+前端动态数据显示，含动态文件列表的显示使用thymeleaf
+数据库使用mybatis
+动态数据分页使用pagehelper  mybatis插件
+
+
 部署
 -------------
 1.在磁盘D新建一个TEST文件夹，用以存储用户文件
@@ -109,3 +116,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 4.项目为了在线预览图片与视频使用了springboot的虚拟路径，路径配置位于WebMvcConfig.java中，默认为D:/Test/
+
+
+网站截图
+---------------
+
+
