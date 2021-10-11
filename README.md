@@ -122,3 +122,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 ---------------
 
 
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片3.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片4.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片5.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片6.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片7.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片8.png)<br><br><br>
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/图片9.png)<br><br><br>
