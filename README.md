@@ -3,7 +3,7 @@
 
 本人为初学者，闲暇之余自学完成这个网站，许多功能并不完善，技术不足请谅解
 
-![](https://github.com/Cloud-Disk-Website/raw/master/src/1.png)
+![image](https://github.com/loivgehoto/Cloud-Disk-Website/blob/master/src/1.png)
 
 
 介绍
